@@ -1,49 +1,55 @@
 <div align="center">
 
-# Polkadot SDK's Parachain Template
+# Barcus Network
 
 <img height="70px" alt="Polkadot SDK Logo" src="https://github.com/paritytech/polkadot-sdk/raw/master/docs/images/Polkadot_Logo_Horizontal_Pink_White.png#gh-dark-mode-only"/>
 <img height="70px" alt="Polkadot SDK Logo" src="https://github.com/paritytech/polkadot-sdk/raw/master/docs/images/Polkadot_Logo_Horizontal_Pink_Black.png#gh-light-mode-only"/>
 
-> This is a template for creating a [parachain](https://wiki.polkadot.network/docs/learn-parachains) based on Polkadot SDK.
+> A custom [parachain](https://wiki.polkadot.network/docs/learn-parachains) built with Polkadot SDK by [BioKeyper](https://github.com/biokeyper).
 >
-> This template is automatically updated after releases in the main [Polkadot SDK monorepo](https://github.com/paritytech/polkadot-sdk).
+> **Parachain ID:** `1000`
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Built with Polkadot SDK](https://img.shields.io/badge/Built%20with-Polkadot%20SDK-E6007A)](https://github.com/paritytech/polkadot-sdk)
 
 </div>
 
 ## Table of Contents
 
-- [Intro](#intro)
-
-- [Template Structure](#template-structure)
-
+- [About](#about)
+- [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
-
 - [Starting a Development Chain](#starting-a-development-chain)
-
   - [Omni Node](#omni-node-prerequisites)
   - [Zombienet setup with Omni Node](#zombienet-setup-with-omni-node)
   - [Parachain Template Node](#parachain-template-node)
   - [Connect with the Polkadot-JS Apps Front-End](#connect-with-the-polkadot-js-apps-front-end)
   - [Takeaways](#takeaways)
-
-- [Runtime development](#runtime-development)
+- [Runtime Development](#runtime-development)
 - [Contributing](#contributing)
-- [Getting Help](#getting-help)
+- [Resources](#resources)
 
-## Intro
+## About
 
-- ⏫ This template provides a starting point to build a [parachain](https://wiki.polkadot.network/docs/learn-parachains).
+**Barcus Network** is a blockchain parachain built using the [Polkadot SDK](https://github.com/paritytech/polkadot-sdk). It leverages the security and interoperability of the Polkadot relay chain while providing custom functionality through specialized pallets.
 
-- ☁️ It is based on the
-  [Cumulus](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/polkadot_sdk/cumulus/index.html) framework.
+### Features
 
-- 🔧 Its runtime is configured with a single custom pallet as a starting point, and a handful of ready-made pallets
-  such as a [Balances pallet](https://paritytech.github.io/polkadot-sdk/master/pallet_balances/index.html).
+- 🔐 **Custom Pallets** - Specialized runtime modules tailored for Barcus Network
+- ⚡ **High Performance** - Built on Substrate framework for optimal efficiency
+- 🌐 **Interoperable** - Connects to Polkadot ecosystem via Cumulus
+- 🛡️ **Secure** - Inherits security from Polkadot relay chain
 
-- 👉 Learn more about parachains [here](https://wiki.polkadot.network/docs/learn-parachains)
+### Technology Stack
 
-## Template Structure
+- **Framework:** [Cumulus](https://paritytech.github.io/polkadot-sdk/master/polkadot_sdk_docs/polkadot_sdk/cumulus/index.html) (Substrate-based parachain framework)
+- **Language:** Rust
+- **Consensus:** Relay chain finality via Polkadot validators
+- **Runtime:** Custom pallets with standard Substrate pallets ([Balances](https://paritytech.github.io/polkadot-sdk/master/pallet_balances/index.html), [System](https://paritytech.github.io/polkadot-sdk/master/frame_system/index.html), etc.)
+
+> 👉 Learn more about parachains [here](https://wiki.polkadot.network/docs/learn-parachains)
+
+## Project Structure
 
 A Polkadot SDK based project such as this one consists of:
 
@@ -63,12 +69,12 @@ A Polkadot SDK based project such as this one consists of:
 - 🛠️ Depending on your operating system and Rust version, there might be additional
   packages required to compile this template - please take note of the Rust compiler output.
 
-Fetch parachain template code:
+Clone the Barcus Network repository:
 
 ```sh
-git clone https://github.com/paritytech/polkadot-sdk-parachain-template.git parachain-template
+git clone https://github.com/biokeyper/barcus-network.git
 
-cd parachain-template
+cd barcus-network
 ```
 
 ## Starting a Development Chain
@@ -244,22 +250,56 @@ relay chain network (see [Parachain Template node](#parachain-template-node) set
 
 ## Contributing
 
-- 🔄 This template is automatically updated after releases in the main [Polkadot SDK monorepo](https://github.com/paritytech/polkadot-sdk).
+We welcome contributions to Barcus Network! Here's how you can contribute:
 
-- ➡️ Any pull requests should be directed to this [source](https://github.com/paritytech/polkadot-sdk/tree/master/templates/parachain).
+1. **Fork the repository** - Create your own fork of the code
+2. **Create a feature branch** - `git checkout -b feature/amazing-feature`
+3. **Commit your changes** - `git commit -m 'Add some amazing feature'`
+4. **Push to the branch** - `git push origin feature/amazing-feature`
+5. **Open a Pull Request** - Submit your changes for review
 
-- 😇 Please refer to the monorepo's
-  [contribution guidelines](https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/CONTRIBUTING.md) and
-  [Code of Conduct](https://github.com/paritytech/polkadot-sdk/blob/master/docs/contributor/CODE_OF_CONDUCT.md).
+### Development Guidelines
 
-## Getting Help
+- Follow Rust best practices and conventions
+- Write tests for new functionality
+- Update documentation as needed
+- Ensure all tests pass before submitting PRs
 
-- 🧑‍🏫 To learn about Polkadot in general, [docs.Polkadot.com](https://docs.polkadot.com/) website is a good starting point.
+### Staying Updated with Polkadot SDK
 
-- 🧑‍🔧 For technical introduction, [here](https://github.com/paritytech/polkadot-sdk#-documentation) are
-  the Polkadot SDK documentation resources.
+This project is based on the [Polkadot SDK Parachain Template](https://github.com/paritytech/polkadot-sdk-parachain-template). To pull upstream updates:
 
-- 👥 Additionally, there are [GitHub issues](https://github.com/paritytech/polkadot-sdk/issues) and
-  [Substrate StackExchange](https://substrate.stackexchange.com/).
-- 👥You can also reach out on the [Official Polkdot discord server](https://polkadot-discord.w3f.tools/)
-- 🧑Reach out on [Telegram](https://t.me/substratedevs) for more questions and discussions
+```sh
+# Fetch updates from the template
+git fetch upstream
+
+# Merge updates into your branch
+git merge upstream/master
+```
+
+## Resources
+
+### Barcus Network
+
+- 📦 **Repository:** [github.com/biokeyper/barcus-network](https://github.com/biokeyper/barcus-network)
+- 🐛 **Issues:** [Submit an issue](https://github.com/biokeyper/barcus-network/issues)
+- 💬 **Discussions:** [GitHub Discussions](https://github.com/biokeyper/barcus-network/discussions)
+
+### Polkadot & Substrate Resources
+
+- 🧑‍🏫 **Polkadot Documentation:** [docs.polkadot.com](https://docs.polkadot.com/)
+- 🧑‍🔧 **Polkadot SDK Docs:** [Polkadot SDK Documentation](https://github.com/paritytech/polkadot-sdk#-documentation)
+- 📚 **Substrate Tutorials:** [docs.substrate.io](https://docs.substrate.io/)
+- 💬 **Substrate StackExchange:** [substrate.stackexchange.com](https://substrate.stackexchange.com/)
+- 👥 **Polkadot Discord:** [Official Polkadot Discord](https://polkadot-discord.w3f.tools/)
+- 📱 **Telegram:** [Substrate Developers](https://t.me/substratedevs)
+
+---
+
+<div align="center">
+
+**Built with ❤️ by [BioKeyper](https://github.com/biokeyper)**
+
+*Powered by [Polkadot SDK](https://github.com/paritytech/polkadot-sdk)*
+
+</div>
