@@ -29,8 +29,11 @@ jobs:
 
       - name: Fix PolkaVM target JSON
         run: |
-          sed -i 's/"target-pointer-width": "64"/"target-pointer-width": 64/' ~/.cache/.polkavm-linker/*/*.json || true
-          sed -i 's/"target-c-int-width": "32"/"target-c-int-width": 32/' ~/.cache/.polkavm-linker/*/*.json || true
+          # Trigger cache creation by starting a build
+          cargo check --all-targets --all-features --locked --workspace 2>&1 | head -n 50 || true
+          # Now patch the generated JSON files
+          find ~/.cache/.polkavm-linker -name "*.json" -type f -exec sed -i 's/"target-pointer-width": "64"/"target-pointer-width": 64/g' {} \; 2>/dev/null || true
+          find ~/.cache/.polkavm-linker -name "*.json" -type f -exec sed -i 's/"target-c-int-width": "32"/"target-c-int-width": 32/g' {} \; 2>/dev/null || true
         shell: bash
 
       - name: Run clippy
