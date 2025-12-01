@@ -265,6 +265,26 @@ We welcome contributions to Barcus Network! Here's how you can contribute:
 - Update documentation as needed
 - Ensure all tests pass before submitting PRs
 
+### Branching Strategy
+
+This repository follows a specific branching model to maintain compatibility with the upstream template while allowing for custom development:
+
+- **`biokeepr`** (Default): The stable branch for Barcus Network. It tracks the upstream Polkadot SDK template releases and contains the core custom pallet integration.
+- **`dev`**: The active development branch. New features, documentation updates (like this README), and experimental changes happen here before being merged into `biokeepr`.
+- **`upstream/master`**: The original [Polkadot SDK Parachain Template](https://github.com/paritytech/polkadot-sdk-parachain-template). We periodically merge updates from here into `biokeepr` to stay current with the latest Polkadot SDK versions.
+
+#### Workflow Visualization
+
+```text
+upstream/master (Polkadot SDK Template)
+      |
+      v
+biokeepr (Barcus Network Stable) <--- merges upstream updates
+      |
+      v
+     dev (Active Development) <--- new features & docs
+```
+
 ### Staying Updated with Polkadot SDK
 
 This project is based on the [Polkadot SDK Parachain Template](https://github.com/paritytech/polkadot-sdk-parachain-template). To pull upstream updates:
