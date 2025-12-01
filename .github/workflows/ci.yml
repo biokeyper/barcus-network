@@ -27,6 +27,12 @@ jobs:
       - if: contains(matrix.os, 'macos')
         uses: ./.github/actions/macos-dependencies
 
+      - name: Fix PolkaVM target JSON
+        run: |
+          sed -i 's/"target-pointer-width": "64"/"target-pointer-width": 64/' ~/.cache/.polkavm-linker/*/*.json || true
+          sed -i 's/"target-c-int-width": "32"/"target-c-int-width": 32/' ~/.cache/.polkavm-linker/*/*.json || true
+        shell: bash
+
       - name: Run clippy
         run: |
           SKIP_WASM_BUILD=1 cargo clippy --all-targets --all-features --locked --workspace --quiet

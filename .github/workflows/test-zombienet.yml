@@ -22,6 +22,12 @@ jobs:
       - uses: ./.github/actions/free-disk-space
       - uses: ./.github/actions/ubuntu-dependencies
 
+      - name: Fix PolkaVM target JSON
+        run: |
+          sed -i 's/"target-pointer-width": "64"/"target-pointer-width": 64/' ~/.cache/.polkavm-linker/*/*.json || true
+          sed -i 's/"target-c-int-width": "32"/"target-c-int-width": 32/' ~/.cache/.polkavm-linker/*/*.json || true
+        shell: bash
+
       - name: Build the node individually in release mode
         run: cargo build --package parachain-template-node --release
         timeout-minutes: 90
