@@ -26,9 +26,13 @@ jobs:
         run: |
           # Trigger cache creation by starting a build
           cargo check --package parachain-template-node 2>&1 | head -n 50 || true
-          # Now patch the generated JSON files
-          find ~/.cache/.polkavm-linker -name "*.json" -type f -exec sed -i 's/"target-pointer-width": "64"/"target-pointer-width": 64/g' {} \; 2>/dev/null || true
-          find ~/.cache/.polkavm-linker -name "*.json" -type f -exec sed -i 's/"target-c-int-width": "32"/"target-c-int-width": 32/g' {} \; 2>/dev/null || true
+          # Patch JSON in both common cache locations
+          for cache_dir in "$HOME/.cache" "$HOME/Library/Caches"; do
+            if [ -d "$cache_dir/.polkavm-linker" ]; then
+              find "$cache_dir/.polkavm-linker" -name "*.json" -type f -exec perl -pi -e 's/"target-pointer-width": "64"/"target-pointer-width": 64/g' {} \; 2>/dev/null || true
+              find "$cache_dir/.polkavm-linker" -name "*.json" -type f -exec perl -pi -e 's/"target-c-int-width": "32"/"target-c-int-width": 32/g' {} \; 2>/dev/null || true
+            fi
+          done
         shell: bash
 
       - name: Build the node individually in release mode
