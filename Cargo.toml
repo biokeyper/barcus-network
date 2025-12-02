@@ -8,7 +8,8 @@ edition = "2021"
 [workspace]
 default-members = ["pallets/template", "runtime"]
 members = [
-    "node", "pallets/custom-pallet",
+    "node",
+    "pallets/custom-pallet",
     "pallets/template",
     "runtime",
 ]
@@ -17,6 +18,7 @@ resolver = "2"
 [workspace.dependencies]
 parachain-template-runtime = { path = "./runtime", default-features = false }
 pallet-parachain-template = { path = "./pallets/template", default-features = false }
+
 clap = { version = "4.5.13" }
 color-print = { version = "0.3.4" }
 docify = { version = "0.2.9" }
@@ -25,6 +27,7 @@ jsonrpsee = { version = "0.24.3" }
 log = { version = "0.4.22", default-features = false }
 polkadot-sdk = { version = "2503.0.1", default-features = false }
 prometheus-endpoint = { version = "0.17.2", default-features = false, package = "substrate-prometheus-endpoint" }
+
 serde = { version = "1.0.214", default-features = false }
 codec = { version = "3.7.4", default-features = false, package = "parity-scale-codec" }
 cumulus-pallet-parachain-system = { version = "0.20.0", default-features = false }
@@ -35,6 +38,19 @@ smallvec = { version = "1.11.0", default-features = false }
 substrate-wasm-builder = { version = "26.0.1", default-features = false }
 frame = { version = "0.9.1", default-features = false, package = "polkadot-sdk-frame" }
 
+# ------------------------------------------------------------------------------
+# FIX: Force PolkaVM + polkavm-linker global upgrade to latest stable
+# Ensures broken 0.21.x is NEVER used transitively by pallets or SDK.
+# ------------------------------------------------------------------------------
+
+[patch.crates-io]
+polkavm = "0.30.0"
+polkavm-linker = "0.30.0"
+
+# ------------------------------------------------------------------------------
+# Build Profiles
+# ------------------------------------------------------------------------------
+
 [profile.release]
 opt-level = 3
 panic = "unwind"
@@ -43,4 +59,3 @@ panic = "unwind"
 codegen-units = 1
 inherits = "release"
 lto = true
-

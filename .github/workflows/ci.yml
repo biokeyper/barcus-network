@@ -4,8 +4,8 @@ on:
   pull_request:
   push:
     branches:
-      - main
-      - master
+      - biokeepr
+      - dev
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -26,6 +26,19 @@ jobs:
         uses: ./.github/actions/ubuntu-dependencies
       - if: contains(matrix.os, 'macos')
         uses: ./.github/actions/macos-dependencies
+
+      - name: Fix PolkaVM target JSON
+        run: |
+          # Trigger cache creation by starting a build
+          cargo check --all-targets --all-features --locked --workspace 2>&1 | head -n 50 || true
+          # Patch JSON in both common cache locations (Linux: ~/.cache, macOS: ~/Library/Caches)
+          for cache_dir in "$HOME/.cache" "$HOME/Library/Caches"; do
+            if [ -d "$cache_dir/.polkavm-linker" ]; then
+              find "$cache_dir/.polkavm-linker" -name "*.json" -type f -exec perl -pi -e 's/"target-pointer-width": "64"/"target-pointer-width": 64/g' {} \; 2>/dev/null || true
+              find "$cache_dir/.polkavm-linker" -name "*.json" -type f -exec perl -pi -e 's/"target-c-int-width": "32"/"target-c-int-width": 32/g' {} \; 2>/dev/null || true
+            fi
+          done
+        shell: bash
 
       - name: Run clippy
         run: |
